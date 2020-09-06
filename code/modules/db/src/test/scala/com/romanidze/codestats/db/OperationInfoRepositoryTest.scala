@@ -5,7 +5,9 @@ import java.nio.file.Paths
 import com.romanidze.codestats.db.config.{DBConfig, DBInitializer}
 import com.romanidze.codestats.db.domain.{OperationInfo, OperationInsertInfo}
 import com.romanidze.codestats.db.repositories.OperationInfoRepository
+import com.zaxxer.hikari.HikariDataSource
 import doobie.hikari.HikariTransactor
+import doobie.util.transactor.Transactor.Aux
 import monix.eval.Task
 import monix.execution.Scheduler.Implicits.global
 
@@ -28,8 +30,8 @@ class OperationInfoRepositoryTest extends munit.FunSuite {
     10
   )
 
-  private val transactor: HikariTransactor[Task] =
-    DBInitializer.getTransactor(config).runSyncUnsafe()
+  private val transactor: Aux[Task, HikariDataSource] =
+    DBInitializer.getTransactor(config)
 
   private val repository = new OperationInfoRepository(transactor)
 

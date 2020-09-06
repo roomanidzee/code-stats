@@ -5,7 +5,7 @@ import java.time.format.{DateTimeFormatter, DateTimeFormatterBuilder}
 
 object Utils {
 
-  private val dateTimeFormatter: DateTimeFormatter =
+  val dateTimeFormatter: DateTimeFormatter =
     new DateTimeFormatterBuilder()
       .parseCaseInsensitive()
       .append(DateTimeFormatter.ISO_LOCAL_DATE)
