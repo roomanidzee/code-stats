@@ -15,4 +15,9 @@ object Versions {
   val doobie = "0.9.0"
   val fs2 = "2.4.4"
 
+  val tethys = "0.11.0"
+  val sttp = "2.2.4"
+  val http4s = "0.21.7"
+  val pureconfig = "0.13.0"
+
 }

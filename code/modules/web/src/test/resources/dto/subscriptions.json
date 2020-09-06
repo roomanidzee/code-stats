@@ -1,0 +1,42 @@
+[
+  {
+    "login": "zjffdu",
+    "id": 164491,
+    "node_id": "MDQ6VXNlcjE2NDQ5MQ==",
+    "avatar_url": "https://avatars2.githubusercontent.com/u/164491?v=4",
+    "gravatar_id": "",
+    "url": "https://api.github.com/users/zjffdu",
+    "html_url": "https://github.com/zjffdu",
+    "followers_url": "https://api.github.com/users/zjffdu/followers",
+    "following_url": "https://api.github.com/users/zjffdu/following{/other_user}",
+    "gists_url": "https://api.github.com/users/zjffdu/gists{/gist_id}",
+    "starred_url": "https://api.github.com/users/zjffdu/starred{/owner}{/repo}",
+    "subscriptions_url": "https://api.github.com/users/zjffdu/subscriptions",
+    "organizations_url": "https://api.github.com/users/zjffdu/orgs",
+    "repos_url": "https://api.github.com/users/zjffdu/repos",
+    "events_url": "https://api.github.com/users/zjffdu/events{/privacy}",
+    "received_events_url": "https://api.github.com/users/zjffdu/received_events",
+    "type": "User",
+    "site_admin": false
+  },
+  {
+    "login": "pshirshov",
+    "id": 295225,
+    "node_id": "MDQ6VXNlcjI5NTIyNQ==",
+    "avatar_url": "https://avatars3.githubusercontent.com/u/295225?v=4",
+    "gravatar_id": "",
+    "url": "https://api.github.com/users/pshirshov",
+    "html_url": "https://github.com/pshirshov",
+    "followers_url": "https://api.github.com/users/pshirshov/followers",
+    "following_url": "https://api.github.com/users/pshirshov/following{/other_user}",
+    "gists_url": "https://api.github.com/users/pshirshov/gists{/gist_id}",
+    "starred_url": "https://api.github.com/users/pshirshov/starred{/owner}{/repo}",
+    "subscriptions_url": "https://api.github.com/users/pshirshov/subscriptions",
+    "organizations_url": "https://api.github.com/users/pshirshov/orgs",
+    "repos_url": "https://api.github.com/users/pshirshov/repos",
+    "events_url": "https://api.github.com/users/pshirshov/events{/privacy}",
+    "received_events_url": "https://api.github.com/users/pshirshov/received_events",
+    "type": "User",
+    "site_admin": false
+  }
+]

@@ -36,6 +36,31 @@ object Dependencies {
     "co.fs2" %% "fs2-reactive-streams" % Versions.fs2
   )
 
+  private val tethys: Seq[ModuleID] = Seq(
+    "com.tethys-json" %% "tethys-core" % Versions.tethys,
+    "com.tethys-json" %% "tethys-jackson" % Versions.tethys,
+    "com.tethys-json" %% "tethys-derivation" % Versions.tethys,
+    "com.tethys-json" %% "tethys-json4s" % Versions.tethys
+  )
+
+  private val sttp: Seq[ModuleID] = Seq(
+    "com.softwaremill.sttp.client" %% "core" % Versions.sttp
+  )
+
+  private val monixClient: Seq[ModuleID] = Seq(
+    "com.softwaremill.sttp.client" %% "async-http-client-backend-monix" % Versions.sttp
+  ).union(sttp)
+
+  private val http4s: Seq[ModuleID] = Seq(
+    "org.http4s" %% "http4s-blaze-server" % Versions.http4s,
+    "org.http4s" %% "http4s-blaze-client" % Versions.http4s,
+    "org.http4s" %% "http4s-dsl"          % Versions.http4s
+  )
+
+  private val pureConfig: Seq[ModuleID] = Seq(
+    "com.github.pureconfig" %% "pureconfig" % Versions.pureconfig
+  )
+
   val protobufModuleDeps: Seq[ModuleID] = scalapb
 
   val parquetModuleDeps: Seq[ModuleID] = monix.union(monixParquet).union(logging)
@@ -43,5 +68,14 @@ object Dependencies {
 
   val dbModuleDeps: Seq[ModuleID] = monix.union(logging).union(relationalDB).union(fs2)
   val dbModuleTestDeps: Seq[ModuleID] = munit.union(logging)
+
+  val webModuleDeps: Seq[ModuleID] =
+    monix.union(logging)
+         .union(tethys)
+         .union(monixClient)
+         .union(http4s)
+         .union(pureConfig)
+
+  val webModuleTestDeps: Seq[ModuleID] = munit.union(logging)
 
 }

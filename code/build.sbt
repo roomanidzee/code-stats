@@ -19,15 +19,15 @@ lazy val commonSettings = Seq(
 lazy val root = (project in file("."))
   .settings(commonSettings)
   .settings(
-    name := s"${projectName}"
+    name := s"$projectName"
   )
-  .aggregate(protobuf, parquet, db)
-  .dependsOn(protobuf, parquet, db)
+  .aggregate(protobuf, parquet, db, web)
+  .dependsOn(protobuf, parquet, db, web)
 
 lazy val protobuf = (project in file("modules/protobuf"))
   .settings(commonSettings)
   .settings(
-    name := s"${projectName}-protobuf",
+    name := s"$projectName-protobuf",
     libraryDependencies ++= Dependencies.protobufModuleDeps,
     PB.targets in Compile := Seq(
       scalapb.gen() -> (sourceManaged in Compile).value
@@ -41,7 +41,7 @@ lazy val protobuf = (project in file("modules/protobuf"))
 lazy val parquet = (project in file("modules/parquet"))
   .settings(commonSettings)
   .settings(
-    name := s"${projectName}-parquet",
+    name := s"$projectName-parquet",
     libraryDependencies ++= Dependencies.parquetModuleDeps ++ Dependencies.parquetModuleTestDeps,
     testFrameworks += new TestFramework("munit.Framework")
   )
@@ -51,7 +51,7 @@ lazy val parquet = (project in file("modules/parquet"))
 lazy val db = (project in file("modules/db"))
   .settings(commonSettings)
   .settings(
-    name := s"${projectName}-db",
+    name := s"$projectName-db",
     testFrameworks += new TestFramework("munit.Framework"),
     libraryDependencies ++= Dependencies.dbModuleDeps ++ Dependencies.dbModuleTestDeps
   )
@@ -59,5 +59,9 @@ lazy val db = (project in file("modules/db"))
 lazy val web = (project in file("modules/web"))
   .settings(commonSettings)
   .settings(
-    name := s"${projectName}-web"
+    name := s"$projectName-web",
+    testFrameworks += new TestFramework("munit.Framework"),
+    libraryDependencies ++= Dependencies.webModuleDeps ++ Dependencies.webModuleTestDeps
   )
+  .aggregate(parquet, db)
+  .dependsOn(parquet, db)
