@@ -1,5 +1,7 @@
 package com.romanidze.codestats.parquet
 
+import java.nio.file.{Files, Paths}
+
 import com.romanidze.codestats.protobuf.Definition.GitHubInfoRecord
 import monix.execution.Scheduler.Implicits.global
 
@@ -39,6 +41,8 @@ class ParquetDataWriterTest extends munit.FunSuite {
       .runSyncUnsafe()
 
     assertEquals(result, 1L)
+
+    Files.delete(Paths.get("target", "test.parquet"))
 
   }
 

@@ -11,4 +11,8 @@ object Versions {
   val log4j2 = "2.13.3"
   val scalaLogging = "3.9.2"
 
+  val h2 = "1.4.200"
+  val doobie = "0.9.0"
+  val fs2 = "2.4.4"
+
 }

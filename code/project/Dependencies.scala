@@ -25,9 +25,23 @@ object Dependencies {
     "com.typesafe.scala-logging" %% "scala-logging" % Versions.scalaLogging
   )
 
+  private val relationalDB: Seq[ModuleID] = Seq(
+    "org.tpolecat" %% "doobie-core"   % Versions.doobie,
+    "org.tpolecat" %% "doobie-h2"     % Versions.doobie,
+    "org.tpolecat" %% "doobie-hikari" % Versions.doobie,
+    "com.h2database" % "h2" % Versions.h2
+  )
+
+  private val fs2: Seq[ModuleID] = Seq(
+    "co.fs2" %% "fs2-reactive-streams" % Versions.fs2
+  )
+
   val protobufModuleDeps: Seq[ModuleID] = scalapb
 
   val parquetModuleDeps: Seq[ModuleID] = monix.union(monixParquet).union(logging)
   val parquetModuleTestDeps: Seq[ModuleID] = munit.union(logging)
+
+  val dbModuleDeps: Seq[ModuleID] = monix.union(logging).union(relationalDB).union(fs2)
+  val dbModuleTestDeps: Seq[ModuleID] = munit.union(logging)
 
 }
