@@ -1,0 +1,10 @@
+{
+  "request": {
+    "method": "GET",
+    "url": "/users/roomanidzee/starred?page=1&per_page=2"
+  },
+  "response": {
+    "status": 200,
+    "bodyFileName": "starred.json"
+  }
+}

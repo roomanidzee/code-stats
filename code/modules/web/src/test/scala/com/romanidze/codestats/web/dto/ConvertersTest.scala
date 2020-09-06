@@ -11,7 +11,7 @@ class ConvertersTest extends munit.FunSuite {
 
     val obj: UserRepositoryInfo =
       ValidationUtils
-        .getDecodedObject[List[UserRepositoryInfo]]("dto/repos.json")
+        .getDecodedObject[List[UserRepositoryInfo]]("wiremock/__files/repos.json")
         .head
 
     val gitHubInfoRecord: GitHubInfoRecord = obj.convert("test", LocalDateTime.now())
@@ -25,7 +25,7 @@ class ConvertersTest extends munit.FunSuite {
 
     val obj: StarredRepositoryInfo =
       ValidationUtils
-        .getDecodedObject[List[StarredRepositoryInfo]]("dto/starred.json")
+        .getDecodedObject[List[StarredRepositoryInfo]]("wiremock/__files/starred.json")
         .head
 
     val gitHubInfoRecord: GitHubInfoRecord = obj.convert("test", LocalDateTime.now())

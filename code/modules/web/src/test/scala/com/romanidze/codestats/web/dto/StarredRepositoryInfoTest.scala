@@ -30,7 +30,10 @@ class StarredRepositoryInfoTest extends munit.FunSuite {
     )
 
     ValidationUtils
-      .validateDecode[List[StarredRepositoryInfo]](List(expectedObj), "dto/starred.json")
+      .validateDecode[List[StarredRepositoryInfo]](
+        List(expectedObj),
+        "wiremock/__files/starred.json"
+      )
 
   }
 

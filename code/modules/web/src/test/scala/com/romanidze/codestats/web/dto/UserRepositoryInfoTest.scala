@@ -27,7 +27,7 @@ class UserRepositoryInfoTest extends munit.FunSuite {
     )
 
     ValidationUtils
-      .validateDecode[List[UserRepositoryInfo]](List(expectedObj), "dto/repos.json")
+      .validateDecode[List[UserRepositoryInfo]](List(expectedObj), "wiremock/__files/repos.json")
 
   }
 

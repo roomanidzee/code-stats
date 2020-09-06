@@ -1,0 +1,10 @@
+{
+  "request": {
+    "method": "GET",
+    "url": "/users/roomanidzee/repos?page=1&per_page=2"
+  },
+  "response": {
+    "status": 200,
+    "bodyFileName": "repos.json"
+  }
+}

@@ -1,0 +1,10 @@
+{
+  "request": {
+    "method": "GET",
+    "url": "/users/roomanidzee/following"
+  },
+  "response": {
+    "status": 200,
+    "bodyFileName": "subscriptions.json"
+  }
+}

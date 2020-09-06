@@ -61,6 +61,9 @@ object Dependencies {
     "com.github.pureconfig" %% "pureconfig" % Versions.pureconfig
   )
 
+  private val wiremock: Seq[ModuleID] =
+    Seq("com.github.tomakehurst" % "wiremock" % Versions.wiremock).map(_ % Test)
+
   val protobufModuleDeps: Seq[ModuleID] = scalapb
 
   val parquetModuleDeps: Seq[ModuleID] = monix.union(monixParquet).union(logging)
@@ -76,6 +79,6 @@ object Dependencies {
          .union(http4s)
          .union(pureConfig)
 
-  val webModuleTestDeps: Seq[ModuleID] = munit.union(logging)
+  val webModuleTestDeps: Seq[ModuleID] = munit.union(logging).union(wiremock)
 
 }

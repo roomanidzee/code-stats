@@ -8,7 +8,10 @@ class SubscriptionInfoTest extends munit.FunSuite {
       List(SubscriptionInfo("zjffdu"), SubscriptionInfo("pshirshov"))
 
     ValidationUtils
-      .validateDecode[List[SubscriptionInfo]](expectedObjects, "dto/subscriptions.json")
+      .validateDecode[List[SubscriptionInfo]](
+        expectedObjects,
+        "wiremock/__files/subscriptions.json"
+      )
 
   }
 
