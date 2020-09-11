@@ -4,6 +4,11 @@ import pureconfig.ConfigSource
 import pureconfig.error.ConfigReaderFailures
 import pureconfig.generic.auto._
 
+/**
+ * Configuration loading from file
+ *
+ * @author Andrey Romanov
+ */
 object ConfigurationLoader {
 
   def load: Either[ConfigReaderFailures, ApplicationConfig] = {

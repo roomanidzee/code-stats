@@ -12,6 +12,11 @@ import monix.execution.Scheduler.Implicits.global
 
 import scala.annotation.nowarn
 
+/**
+ * Class for writing processed GitHub data to Apache Parquet format
+ *
+ * @author Andrey Romanov
+ */
 object ParquetDataWriter extends LazyLogging {
 
   def writeAggregatedData(filePath: String, dataForWrite: List[GitHubInfoRecord]): Task[Long] = {

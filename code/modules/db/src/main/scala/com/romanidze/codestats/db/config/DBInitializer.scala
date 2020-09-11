@@ -4,13 +4,17 @@ import java.util.concurrent.Executors
 
 import cats.effect.Blocker
 import com.zaxxer.hikari.{HikariConfig, HikariDataSource}
-import doobie.hikari.HikariTransactor
 import doobie.util.transactor.Transactor
 import doobie.util.transactor.Transactor.Aux
 import monix.eval.Task
 
 import scala.concurrent.ExecutionContext
 
+/**
+ * Initializer for DB transactor
+ *
+ * @author Andrey Romanov
+ */
 object DBInitializer {
 
   def getTransactor(config: DBConfig): Aux[Task, HikariDataSource] = {

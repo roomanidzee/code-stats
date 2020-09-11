@@ -3,6 +3,10 @@ package com.romanidze.codestats.web.dto
 import java.time.{LocalDateTime, ZoneOffset}
 import java.time.format.{DateTimeFormatter, DateTimeFormatterBuilder}
 
+/**
+ * Utils for interaction with time
+ * @author Andrey Romanov
+ */
 object Utils {
 
   val dateTimeFormatter: DateTimeFormatter =

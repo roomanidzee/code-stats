@@ -3,6 +3,10 @@ package com.romanidze.codestats.db.queries
 import com.romanidze.codestats.db.domain.{OperationInfo, OperationInsertInfo}
 import doobie.implicits._
 
+/**
+ * Definition of SQL queries with OperationInfo model
+ * @author Andrey Romanov
+ */
 object OperationInfoQueries {
 
   def insert(operationInfo: OperationInsertInfo): doobie.Update0 = {

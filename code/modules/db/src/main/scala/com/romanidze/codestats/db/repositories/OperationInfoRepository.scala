@@ -9,6 +9,12 @@ import fs2.interop.reactivestreams._
 import monix.execution.Scheduler.Implicits.global
 import monix.reactive.Observable
 
+/**
+ * Repository, which interacts with OperationInfo data
+ * @param xa transactor for query execution
+ *
+ * @author Andrey Romanov
+ */
 class OperationInfoRepository(xa: Transactor[Task]) {
 
   def insert(operationInfo: OperationInsertInfo): Task[List[Long]] = {

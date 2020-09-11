@@ -4,6 +4,11 @@ import java.time.LocalDateTime
 
 import com.romanidze.codestats.protobuf.Definition.GitHubInfoRecord
 
+/**
+ * Converters from github classes to protobuf model definition
+ * @author Andrey Romanov
+ */
+
 object Converters {
 
   implicit class UserRepositoryInfoConverter(val obj: UserRepositoryInfo) {

@@ -3,6 +3,10 @@ package com.romanidze.codestats.web.dto
 import tethys._
 import tethys.jackson._
 
+/**
+ * Github classes for data extracting
+ * @author Andrey Romanov
+ */
 case class OwnerInfo(username: String, typeInfo: String)
 
 object OwnerInfo {
