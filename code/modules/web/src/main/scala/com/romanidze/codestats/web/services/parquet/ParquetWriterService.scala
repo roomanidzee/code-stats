@@ -10,8 +10,6 @@ import com.romanidze.codestats.web.config.ParquetConfig
 import com.romanidze.codestats.web.dto.Utils
 import monix.eval.Task
 
-import scala.util.Try
-
 /**
  * Service for data loading to Apache Parquet format
  * @param config parquet config
@@ -20,30 +18,25 @@ import scala.util.Try
 class ParquetWriterService(config: ParquetConfig) {
 
   private val dateFormatter = DateTimeFormatter.ofPattern("yyyyMMdd")
+  private val dateTimeFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd-HH-mm-ss")
 
   def writeRecords(username: String, records: List[GitHubInfoRecord]): Task[Long] = {
 
     val currentDate: String = LocalDate.now().format(dateFormatter)
 
-    val dirTryPath: Try[Path] = Try {
-      Paths.get(config.directory, currentDate).toRealPath()
-    }
-
-    val dirPath: Path = dirTryPath.getOrElse(Paths.get("").toAbsolutePath)
+    val dirPath: Path = Paths.get(config.directory, currentDate).toAbsolutePath
 
     if (!Files.exists(dirPath)) {
       Files.createDirectory(dirPath)
     }
 
-    val currentTime: String = LocalDateTime.now().format(Utils.dateTimeFormatter)
+    val currentTime: String = LocalDateTime.now().format(dateTimeFormatter)
 
-    val filePath: String =
+    val filePath: Path =
       Paths
         .get(dirPath.toString, s"${currentTime}-${username}.parquet")
-        .toRealPath()
-        .toString
 
-    ParquetDataWriter.writeAggregatedData(filePath, records)
+    ParquetDataWriter.writeAggregatedData(filePath.toUri.toString, records)
 
   }
 

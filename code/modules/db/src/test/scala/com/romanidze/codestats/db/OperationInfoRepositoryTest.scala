@@ -6,7 +6,6 @@ import com.romanidze.codestats.db.config.{DBConfig, DBInitializer}
 import com.romanidze.codestats.db.domain.{OperationInfo, OperationInsertInfo}
 import com.romanidze.codestats.db.repositories.OperationInfoRepository
 import com.zaxxer.hikari.HikariDataSource
-import doobie.hikari.HikariTransactor
 import doobie.util.transactor.Transactor.Aux
 import monix.eval.Task
 import monix.execution.Scheduler.Implicits.global

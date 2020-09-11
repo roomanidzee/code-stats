@@ -1,13 +1,12 @@
-package com.romanidze.codestats.parquet
-
-import java.nio.file.{Files, Paths}
+package com.romanidze.codestats.web.services.parquet
 
 import com.romanidze.codestats.protobuf.Definition.GitHubInfoRecord
+import com.romanidze.codestats.web.config.ParquetConfig
 import monix.execution.Scheduler.Implicits.global
 
-class ParquetDataWriterTest extends munit.FunSuite {
+class ParquetWriterServiceTest extends munit.FunSuite {
 
-  test("data write for github records") {
+  test("should write records") {
 
     val testRecord: GitHubInfoRecord = GitHubInfoRecord
       .newBuilder()
@@ -37,8 +36,10 @@ class ParquetDataWriterTest extends munit.FunSuite {
       .setOpenIssues(10)
       .build()
 
-    val result: Long = ParquetDataWriter
-      .writeAggregatedData("target/test.parquet", List(testRecord))
+    val parquetWriterService = new ParquetWriterService(ParquetConfig("target"))
+
+    val result: Long = parquetWriterService
+      .writeRecords("test", List(testRecord))
       .runSyncUnsafe()
 
     assertEquals(result, 1L)

@@ -39,7 +39,7 @@ class MonixClientInterpreterTest extends munit.FunSuite {
   test("retrieve repositories") {
 
     val responseTask: Task[Either[ClientError, List[UserRepositoryInfo]]] =
-      client.getUserRepositories("roomanidzee", 2, 1)
+      client.getUserRepositories("roomanidzee", 100, 1)
 
     val responseEither: Either[ClientError, List[UserRepositoryInfo]] = responseTask.runSyncUnsafe()
 
@@ -55,7 +55,7 @@ class MonixClientInterpreterTest extends munit.FunSuite {
   test("retrieve starred repositories") {
 
     val responseTask: Task[Either[ClientError, List[StarredRepositoryInfo]]] =
-      client.getStarredRepositories("roomanidzee", 2, 1)
+      client.getStarredRepositories("roomanidzee", 100, 1)
 
     val responseEither: Either[ClientError, List[StarredRepositoryInfo]] =
       responseTask.runSyncUnsafe()

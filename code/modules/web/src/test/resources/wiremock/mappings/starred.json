@@ -1,7 +1,7 @@
 {
   "request": {
     "method": "GET",
-    "url": "/users/roomanidzee/starred?page=1&per_page=2"
+    "url": "/users/roomanidzee/starred?page=1&per_page=100"
   },
   "response": {
     "status": 200,

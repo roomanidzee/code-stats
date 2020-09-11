@@ -31,7 +31,7 @@ class GHClientUtils(clientConfig: ClientConfig, client: MonixClientInterpreter) 
         input.toOption.get
           .find(elem => elem.username == username)
 
-      if (subInfoOpt.isEmpty) {
+      if (subInfoOpt.isEmpty || username == clientConfig.requestUsername) {
         Task(Right(SubscriptionInfo(clientConfig.requestUsername)))
       }
 

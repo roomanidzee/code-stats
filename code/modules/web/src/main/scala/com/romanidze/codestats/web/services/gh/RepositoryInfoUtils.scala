@@ -34,8 +34,9 @@ class RepositoryInfoUtils(
           ClientError("Unknown username", Some("No such username in person subscriptions"), None)
         )
       )
+    } else {
+      Task(Right(subInfo.get.username, operation))
     }
-    Task(Right(subInfo.get.username, operation))
 
   }
 
