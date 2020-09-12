@@ -16,7 +16,7 @@ class StarredRepositoryInfoTest extends munit.FunSuite {
         951,
         95,
         95,
-        "Scala",
+        Some("Scala"),
         true,
         true,
         true,

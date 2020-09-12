@@ -17,7 +17,7 @@ class ConvertersTest extends munit.FunSuite {
     val gitHubInfoRecord: GitHubInfoRecord = obj.convert("test", LocalDateTime.now())
 
     assertEquals(gitHubInfoRecord.getName, obj.repoName)
-    assertEquals(gitHubInfoRecord.getLanguage, obj.language)
+    assertEquals(gitHubInfoRecord.getLanguage, obj.language.get)
 
   }
 
@@ -32,7 +32,7 @@ class ConvertersTest extends munit.FunSuite {
 
     assume(gitHubInfoRecord.getIsStarred)
     assertEquals(gitHubInfoRecord.getName, obj.repo.repoName)
-    assertEquals(gitHubInfoRecord.getLanguage, obj.repo.language)
+    assertEquals(gitHubInfoRecord.getLanguage, obj.repo.language.get)
 
   }
 

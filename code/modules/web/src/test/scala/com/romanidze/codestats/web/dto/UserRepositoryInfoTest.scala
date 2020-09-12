@@ -14,7 +14,7 @@ class UserRepositoryInfoTest extends munit.FunSuite {
       947,
       0,
       0,
-      "Java",
+      Some("Java"),
       true,
       true,
       true,

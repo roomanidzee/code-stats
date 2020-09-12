@@ -21,7 +21,6 @@ object Dependencies {
   private val logging: Seq[ModuleID] = Seq(
     "org.apache.logging.log4j" % "log4j-api" % Versions.log4j2,
     "org.apache.logging.log4j" % "log4j-core" % Versions.log4j2,
-    "org.apache.logging.log4j" % "log4j-1.2-api" % Versions.log4j2,
     "com.typesafe.scala-logging" %% "scala-logging" % Versions.scalaLogging
   )
 

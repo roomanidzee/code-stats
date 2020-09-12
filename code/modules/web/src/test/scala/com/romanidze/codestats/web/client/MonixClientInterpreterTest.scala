@@ -48,7 +48,7 @@ class MonixClientInterpreterTest extends munit.FunSuite {
     val repos: List[UserRepositoryInfo] = responseEither.toOption.get
 
     assertEquals(repos.size, 1)
-    assertEquals(repos.head.language, "Java")
+    assertEquals(repos.head.language.get, "Java")
 
   }
 

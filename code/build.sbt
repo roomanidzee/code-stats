@@ -21,8 +21,8 @@ lazy val root = (project in file("."))
   .settings(
     name := s"$projectName"
   )
-  .aggregate(protobuf, parquet, db, web)
-  .dependsOn(protobuf, parquet, db, web)
+  .aggregate(protobuf, parquet, web)
+  .dependsOn(protobuf, parquet, web)
 
 lazy val protobuf = (project in file("modules/protobuf"))
   .settings(commonSettings)
@@ -48,14 +48,6 @@ lazy val parquet = (project in file("modules/parquet"))
   .aggregate(protobuf)
   .dependsOn(protobuf)
 
-lazy val db = (project in file("modules/db"))
-  .settings(commonSettings)
-  .settings(
-    name := s"$projectName-db",
-    testFrameworks += new TestFramework("munit.Framework"),
-    libraryDependencies ++= Dependencies.dbModuleDeps ++ Dependencies.dbModuleTestDeps
-  )
-
 lazy val web = (project in file("modules/web"))
   .settings(commonSettings)
   .settings(
@@ -63,5 +55,5 @@ lazy val web = (project in file("modules/web"))
     testFrameworks += new TestFramework("munit.Framework"),
     libraryDependencies ++= Dependencies.webModuleDeps ++ Dependencies.webModuleTestDeps
   )
-  .aggregate(parquet, db)
-  .dependsOn(parquet, db)
+  .aggregate(parquet)
+  .dependsOn(parquet)

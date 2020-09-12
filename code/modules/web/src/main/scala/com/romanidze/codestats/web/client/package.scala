@@ -4,14 +4,15 @@ import tethys._
 import tethys.jackson._
 import tethys.JsonReader
 import tethys.readers.ReaderError
-
 import java.nio.ByteBuffer
+
+import com.typesafe.scalalogging.LazyLogging
 import monix.eval.Task
 import monix.reactive.Observable
 import sttp.client.{Request, Response, SttpBackend}
 import sttp.client.asynchttpclient.WebSocketHandler
 
-package object client {
+package object client extends LazyLogging {
 
   type MonixBackend = SttpBackend[Task, Observable[ByteBuffer], WebSocketHandler]
   type ClientRequest = Request[Either[String, String], Nothing]
@@ -22,13 +23,17 @@ package object client {
     val errorMessage = "Error while processing response body"
 
     if (body.isLeft) {
-      Left(ClientError(errorMessage, Some(body.swap.toOption.get), None))
+      val messageLeft: String = body.swap.toOption.get
+      println(messageLeft)
+      Left(ClientError(errorMessage, Some(messageLeft), None))
     } else {
 
       val queryStatus: Either[ReaderError, A] = body.toOption.get.jsonAs[A]
 
       if (queryStatus.isLeft) {
-        Left(ClientError(errorMessage, None, Some(queryStatus.swap.toOption.get.getMessage)))
+        val errorLocalMessage: String = queryStatus.swap.toOption.get.getMessage
+        println(errorLocalMessage)
+        Left(ClientError(errorMessage, None, Some(errorLocalMessage)))
       }
 
       Right(queryStatus.toOption.get)

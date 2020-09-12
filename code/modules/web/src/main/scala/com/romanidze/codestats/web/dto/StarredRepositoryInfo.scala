@@ -28,7 +28,7 @@ case class RepoObject(
   size: Long,
   stargazersCount: Long,
   watchersCount: Long,
-  language: String,
+  language: Option[String],
   hasIssues: Boolean,
   hasProjects: Boolean,
   hasDownloads: Boolean,
@@ -52,7 +52,7 @@ object RepoObject {
     .addField[Long]("size")
     .addField[Long]("stargazers_count")
     .addField[Long]("watchers_count")
-    .addField[String]("language")
+    .addField[Option[String]]("language")
     .addField[Boolean]("has_issues")
     .addField[Boolean]("has_projects")
     .addField[Boolean]("has_downloads")
