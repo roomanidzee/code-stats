@@ -1,10 +1,11 @@
 package com.romanidze.codestats.web.services.gh
 
+import java.io.IOException
+
 import com.romanidze.codestats.web.client.{ClientError, MonixClientInterpreter}
 import com.romanidze.codestats.web.dto.{StarredRepositoryInfo, SubscriptionInfo, UserRepositoryInfo}
 import com.romanidze.codestats.web.services.db.OperationInfoService
 import monix.eval.Task
-import monix.execution.Scheduler.Implicits.global
 
 /**
  * Utils for working with user repository info data
@@ -22,20 +23,25 @@ class RepositoryInfoUtils(
     operation: String
   ): Task[Either[ClientError, (String, String)]] = {
 
-    if (input.isLeft) {
-      Task(Left(input.swap.toOption.get))
-    }
+    Task {
 
-    val subInfo: Option[SubscriptionInfo] = input.toOption.get
+      input match {
+        case Left(value) => Left(value)
+        case Right(value) =>
+          val subInfo: Option[SubscriptionInfo] = value
 
-    if (subInfo.isEmpty) {
-      Task(
-        Left(
-          ClientError("Unknown username", Some("No such username in person subscriptions"), None)
-        )
-      )
-    } else {
-      Task(Right(subInfo.get.username, operation))
+          if (subInfo.isEmpty) {
+            Left(
+              ClientError(
+                "Unknown username",
+                Some("No such username in person subscriptions"),
+                None
+              )
+            )
+          } else {
+            Right(subInfo.get.username, operation)
+          }
+      }
     }
 
   }
@@ -44,9 +50,8 @@ class RepositoryInfoUtils(
     input: Either[ClientError, (String, String)]
   ): Task[Either[ClientError, List[UserRepositoryInfo]]] = {
 
-    if (input.isLeft) {
-      Task(Left(input.swap.toOption.get))
-    }
+    if (input.isLeft)
+      throw new IOException("wrong input")
 
     val subClientData: (String, String) = input.toOption.get
 
@@ -64,9 +69,8 @@ class RepositoryInfoUtils(
     input: Either[ClientError, (String, String)]
   ): Task[Either[ClientError, List[StarredRepositoryInfo]]] = {
 
-    if (input.isLeft) {
-      Task(Left(input.swap.toOption.get))
-    }
+    if (input.isLeft)
+      throw new IOException("wrong input")
 
     val subClientData: (String, String) = input.toOption.get
 

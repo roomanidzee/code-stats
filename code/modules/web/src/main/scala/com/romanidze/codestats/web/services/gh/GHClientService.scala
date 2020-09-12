@@ -5,7 +5,6 @@ import com.romanidze.codestats.web.config.ClientConfig
 import com.romanidze.codestats.web.dto.{StarredRepositoryInfo, UserRepositoryInfo}
 import com.romanidze.codestats.web.services.db.OperationInfoService
 import monix.eval.Task
-import monix.execution.Scheduler.Implicits.global
 
 /**
  * Service for working with GitHub data

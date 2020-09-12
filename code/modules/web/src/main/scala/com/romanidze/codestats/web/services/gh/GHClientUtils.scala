@@ -4,7 +4,6 @@ import com.romanidze.codestats.web.client.{ClientError, MonixClientInterpreter}
 import com.romanidze.codestats.web.config.ClientConfig
 import com.romanidze.codestats.web.dto.SubscriptionInfo
 import monix.eval.Task
-import monix.execution.Scheduler.Implicits.global
 
 /**
  * Utils for working with GitHub client
@@ -23,19 +22,20 @@ class GHClientUtils(clientConfig: ClientConfig, client: MonixClientInterpreter) 
     input: Either[ClientError, List[SubscriptionInfo]]
   ): Task[Either[ClientError, Option[SubscriptionInfo]]] = {
 
-    if (input.isLeft) {
-      Task(Left(input.swap.toOption.get))
-    } else {
+    Task {
 
-      val subInfoOpt: Option[SubscriptionInfo] =
-        input.toOption.get
-          .find(elem => elem.username == username)
+      input match {
+        case Left(value) => Left(value)
+        case Right(value) =>
+          val subInfoOpt: Option[SubscriptionInfo] =
+            value.find(elem => elem.username == username)
 
-      if (subInfoOpt.isEmpty || username == clientConfig.requestUsername) {
-        Task(Right(SubscriptionInfo(clientConfig.requestUsername)))
+          if (subInfoOpt.isEmpty || username == clientConfig.requestUsername) {
+            Right(SubscriptionInfo(clientConfig.requestUsername))
+          }
+
+          Right(subInfoOpt)
       }
-
-      Task(Right(subInfoOpt))
 
     }
 
