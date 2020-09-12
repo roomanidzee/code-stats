@@ -15,7 +15,7 @@ import monix.eval.Task
 class GHClientUtils(clientConfig: ClientConfig, client: MonixClientInterpreter) {
 
   def getFollowers: Task[Either[ClientError, List[SubscriptionInfo]]] =
-    client.getSubscriptions(clientConfig.requestUsername)
+    client.getSubscriptions(clientConfig.origin)
 
   def processFollowersData(
     username: String,
@@ -30,8 +30,8 @@ class GHClientUtils(clientConfig: ClientConfig, client: MonixClientInterpreter) 
           val subInfoOpt: Option[SubscriptionInfo] =
             value.find(elem => elem.username == username)
 
-          if (subInfoOpt.isEmpty || username == clientConfig.requestUsername) {
-            Right(SubscriptionInfo(clientConfig.requestUsername))
+          if (subInfoOpt.isEmpty || username == clientConfig.origin) {
+            Right(SubscriptionInfo(clientConfig.origin))
           }
 
           Right(subInfoOpt)

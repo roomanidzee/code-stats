@@ -6,7 +6,6 @@ import com.romanidze.codestats.web.services.gh.GHClientService
 import com.romanidze.codestats.web.services.parquet.ParquetWriterService
 import com.typesafe.scalalogging.LazyLogging
 import monix.eval.Task
-import monix.execution.Scheduler.Implicits.global
 
 /**
  * Service for working with GitHub statistics

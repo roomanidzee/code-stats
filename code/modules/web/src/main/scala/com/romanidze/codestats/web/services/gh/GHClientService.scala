@@ -15,7 +15,7 @@ import monix.eval.Task
  */
 class GHClientService(clientConfig: ClientConfig, operationInfoService: OperationInfoService) {
 
-  private val client = new MonixClientInterpreter(clientConfig.baseURL)
+  private val client = new MonixClientInterpreter(clientConfig.base)
   private val ghClientUtils = new GHClientUtils(clientConfig, client)
 
   private val repositoryInfoUtils = new RepositoryInfoUtils(client, operationInfoService)

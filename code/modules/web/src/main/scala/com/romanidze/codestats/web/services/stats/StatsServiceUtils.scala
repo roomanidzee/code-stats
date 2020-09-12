@@ -9,7 +9,6 @@ import com.romanidze.codestats.web.services.parquet.ParquetWriterService
 import com.typesafe.scalalogging.LazyLogging
 import com.romanidze.codestats.web.dto.Converters._
 import monix.eval.Task
-import monix.execution.Scheduler.Implicits.global
 
 /**
  * Utils for working with stats service

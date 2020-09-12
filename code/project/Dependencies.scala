@@ -51,12 +51,6 @@ object Dependencies {
     "com.softwaremill.sttp.client" %% "async-http-client-backend-monix" % Versions.sttp
   ).union(sttp)
 
-  private val http4s: Seq[ModuleID] = Seq(
-    "org.http4s" %% "http4s-blaze-server" % Versions.http4s,
-    "org.http4s" %% "http4s-blaze-client" % Versions.http4s,
-    "org.http4s" %% "http4s-dsl"          % Versions.http4s
-  )
-
   private val pureConfig: Seq[ModuleID] = Seq(
     "com.github.pureconfig" %% "pureconfig" % Versions.pureconfig
   )
@@ -76,7 +70,6 @@ object Dependencies {
     monix.union(logging)
          .union(tethys)
          .union(monixClient)
-         .union(http4s)
          .union(pureConfig)
 
   val webModuleTestDeps: Seq[ModuleID] = munit.union(logging).union(wiremock)

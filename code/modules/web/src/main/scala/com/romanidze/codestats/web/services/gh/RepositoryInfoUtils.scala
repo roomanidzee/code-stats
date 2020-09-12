@@ -51,7 +51,7 @@ class RepositoryInfoUtils(
   ): Task[Either[ClientError, List[UserRepositoryInfo]]] = {
 
     if (input.isLeft)
-      throw new IOException("wrong input")
+      throw new IOException(input.swap.toOption.get.toString)
 
     val subClientData: (String, String) = input.toOption.get
 
@@ -70,7 +70,7 @@ class RepositoryInfoUtils(
   ): Task[Either[ClientError, List[StarredRepositoryInfo]]] = {
 
     if (input.isLeft)
-      throw new IOException("wrong input")
+      throw new IOException(input.swap.toOption.get.toString)
 
     val subClientData: (String, String) = input.toOption.get
 
