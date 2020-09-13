@@ -31,9 +31,4 @@ clickhouse-client -n <<-EOSQL
     ) ENGINE = File(Parquet);
 EOSQL
 
-search_dir=/opt/parquet_files
-
-for entry in "$search_dir"/*
-do
-  cat "$entry" | clickhouse-client --query="INSERT INTO docker.parquet_files FORMAT Parquet"
-done
+cat /opt/parquet_files/final.parquet | clickhouse-client --query="INSERT INTO docker.parquet_files FORMAT Parquet"

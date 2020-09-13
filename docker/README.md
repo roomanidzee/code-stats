@@ -5,7 +5,7 @@ Clickhouse DB , which used for analysing extracted data from Parquet files
 
 ## How to launch?
 
-* Place all your extracted parquet files under folder ```docker/parquet_files``` . You can see there example of a file
+* Merge all your parquet files into ```final.parquet``` with ```parquet-tools``` jar, and place it into ```docker/parquet_files```
 * Run ```docker-compose up -d``` for ClickHouse launch
 * Run ```docker run -it --rm --network docker_default --link some-clickhouse-server:clickhouse-server yandex/clickhouse-client:20.6.6.7 --host clickhouse-server``` command for connecting with native client interface. With that command you can interact with data in container.
 
