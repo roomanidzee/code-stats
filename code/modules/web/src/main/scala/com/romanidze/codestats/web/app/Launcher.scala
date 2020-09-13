@@ -12,39 +12,6 @@ import monix.execution.Scheduler
 
 object Launcher extends TaskApp {
 
-  // think, that all requests are correct (for education purposes)
-  def launchProcessing(
-    config: ClientConfig,
-    statsUtils: StatsServiceUtils,
-    client: MonixClientInterpreter
-  ): Task[MessageResponse] = {
-
-    implicit val schedulerInstance: Scheduler = scheduler
-    val username = config.origin
-
-    for {
-      userRepos        <- client.getUserRepositories(username, config.limit, config.page)
-      _                <- statsUtils.processUserRepoResponse(username, userRepos)
-      userStarredRepos <- client.getStarredRepositories(username, config.limit, config.page)
-      _                <- statsUtils.processStarredRepoResponse(username, userStarredRepos)
-      subscriptions    <- client.getSubscriptions(username)
-      subscriptionsInstance = subscriptions.toOption.get
-      userSubsRepos <- Task.parTraverse(subscriptionsInstance)(
-        elem => client.getUserRepositories(elem.username, config.limit, config.page)
-      )
-      _ <- Task.parTraverse(userSubsRepos)(
-        elem => statsUtils.processUserRepoResponse(username, elem)
-      )
-      userSubsStarredRepos <- Task.parTraverse(subscriptionsInstance)(
-        elem => client.getStarredRepositories(elem.username, config.limit, config.page)
-      )
-      _ <- Task.parTraverse(userSubsStarredRepos)(
-        elem => statsUtils.processStarredRepoResponse(username, elem)
-      )
-
-    } yield MessageResponse("Data successfully processed")
-  }
-
   override def run(args: List[String]): Task[ExitCode] = {
 
     val appConfig: ApplicationConfig = ConfigurationLoader.load
@@ -53,10 +20,10 @@ object Launcher extends TaskApp {
     val parquetWriterService = new ParquetWriterService(appConfig.parquet)
     val statsServiceUtils = new StatsServiceUtils(parquetWriterService)
 
-    val monixClientInterpreter = new MonixClientInterpreter(appConfig.client.base)
+    val dataProcessing = new DataProcessing(statsServiceUtils, appConfig.client)
+    implicit val schedulerInstance: Scheduler = scheduler
 
-    launchProcessing(appConfig.client, statsServiceUtils, monixClientInterpreter)
-      .as(ExitCode.Success)
+    dataProcessing.process.as(ExitCode.Success)
 
   }
 }

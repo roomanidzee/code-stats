@@ -2,6 +2,7 @@ package com.romanidze.codestats.web.client
 
 import com.github.tomakehurst.wiremock.WireMockServer
 import com.github.tomakehurst.wiremock.core.WireMockConfiguration.wireMockConfig
+import com.romanidze.codestats.web.config.ClientConfig
 import com.romanidze.codestats.web.dto.{StarredRepositoryInfo, SubscriptionInfo, UserRepositoryInfo}
 import monix.eval.Task
 import monix.execution.Scheduler.Implicits.global
@@ -17,7 +18,8 @@ class MonixClientInterpreterTest extends munit.FunSuite {
   override def beforeAll(): Unit = wireMockServer.start()
   override def afterAll(): Unit = wireMockServer.stop()
 
-  private val client = new MonixClientInterpreter("http://localhost:9001")
+  private val config = new ClientConfig("http://localhost:9001", "roomanidzee", 1, 100, "")
+  private val client = new MonixClientInterpreter(config)
 
   test("get subscriptions") {
 
@@ -39,7 +41,7 @@ class MonixClientInterpreterTest extends munit.FunSuite {
   test("retrieve repositories") {
 
     val responseTask: Task[Either[ClientError, List[UserRepositoryInfo]]] =
-      client.getUserRepositories("roomanidzee", 100, 1)
+      client.getUserRepositories("roomanidzee")
 
     val responseEither: Either[ClientError, List[UserRepositoryInfo]] = responseTask.runSyncUnsafe()
 
@@ -55,7 +57,7 @@ class MonixClientInterpreterTest extends munit.FunSuite {
   test("retrieve starred repositories") {
 
     val responseTask: Task[Either[ClientError, List[StarredRepositoryInfo]]] =
-      client.getStarredRepositories("roomanidzee", 100, 1)
+      client.getStarredRepositories("roomanidzee")
 
     val responseEither: Either[ClientError, List[StarredRepositoryInfo]] =
       responseTask.runSyncUnsafe()

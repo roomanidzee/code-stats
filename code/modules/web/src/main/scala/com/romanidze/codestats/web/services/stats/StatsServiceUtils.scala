@@ -32,14 +32,10 @@ class StatsServiceUtils(parquetService: ParquetWriterService) extends LazyLoggin
 
   def processUserRepoResponse(
     processUsername: String,
-    input: Either[ClientError, List[UserRepositoryInfo]]
+    input: List[UserRepositoryInfo]
   ): Task[Either[ClientError, MessageResponse]] = {
 
-    if (input.isLeft) {
-      Task(input.swap.toOption.get)
-    }
-
-    val processed: List[GitHubInfoRecord] = input.toOption.get
+    val processed: List[GitHubInfoRecord] = input
       .map(elem => elem.convert(processUsername, LocalDateTime.now()))
 
     for {
@@ -50,14 +46,10 @@ class StatsServiceUtils(parquetService: ParquetWriterService) extends LazyLoggin
 
   def processStarredRepoResponse(
     processUsername: String,
-    input: Either[ClientError, List[StarredRepositoryInfo]]
+    input: List[StarredRepositoryInfo]
   ): Task[Either[ClientError, MessageResponse]] = {
 
-    if (input.isLeft) {
-      Task(input.swap.toOption.get)
-    }
-
-    val processed: List[GitHubInfoRecord] = input.toOption.get
+    val processed: List[GitHubInfoRecord] = input
       .map(elem => elem.convert(processUsername, LocalDateTime.now()))
 
     for {

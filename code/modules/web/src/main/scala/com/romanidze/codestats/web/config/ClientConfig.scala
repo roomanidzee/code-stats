@@ -6,7 +6,8 @@ package com.romanidze.codestats.web.config
  * @param origin GitHub username for data interaction
  * @param page GitHub data page index
  * @param limit GitHub data limit value
+ * @param token GitHub oauth token
  *
  * @author Andrey Romanov
  */
-case class ClientConfig(base: String, origin: String, page: Short, limit: Short)
+case class ClientConfig(base: String, origin: String, page: Short, limit: Short, token: String)

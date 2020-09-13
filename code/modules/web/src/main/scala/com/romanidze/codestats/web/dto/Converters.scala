@@ -18,7 +18,7 @@ object Converters {
       GitHubInfoRecord
         .newBuilder()
         .setGhRequestUser(ghRequestUser)
-        .setRecordCreatedTime(Utils.convertToLong(recordCreatedTime).toDouble)
+        .setRecordCreatedTime(Utils.convertToLong(recordCreatedTime))
         .setName(obj.repoName)
         .setIsStarred(false)
         .setStarredAt(0L)
@@ -54,7 +54,7 @@ object Converters {
       GitHubInfoRecord
         .newBuilder()
         .setGhRequestUser(ghRequestUser)
-        .setRecordCreatedTime(Utils.convertToLong(recordCreatedTime).toDouble)
+        .setRecordCreatedTime(Utils.convertToLong(recordCreatedTime))
         .setName(obj.repo.repoName)
         .setIsStarred(true)
         .setStarredAt(Utils.convertToLong(Utils.convertToTime(obj.starredAt)))

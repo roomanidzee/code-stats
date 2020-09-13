@@ -11,7 +11,7 @@ class ParquetWriterServiceTest extends munit.FunSuite {
     val testRecord: GitHubInfoRecord = GitHubInfoRecord
       .newBuilder()
       .setGhRequestUser("test")
-      .setRecordCreatedTime(0.0)
+      .setRecordCreatedTime(0L)
       .setName("test")
       .setIsStarred(true)
       .setStarredAt(0L)
