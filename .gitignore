@@ -27,6 +27,8 @@
 hs_err_pid*
 ### Scala ###
 target
+venv
+.ipynb_checkpoints
 ### VisualStudioCode ###
 .vscode
 .metals
